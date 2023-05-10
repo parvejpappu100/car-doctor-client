@@ -9,7 +9,7 @@ import {FaArrowRight , FaArrowLeft} from 'react-icons/fa'
 
 const Banner = () => {
   return (
-    <div className="carousel h-[344px] md:h-[544px] w-full lg:h-[700px]">
+    <div className="carousel h-[344px] md:h-[544px] w-full lg:h-[700px] rounded-xl">
       <div id="slide1" className="carousel-item relative w-full ">
         <img
           src={img1}
