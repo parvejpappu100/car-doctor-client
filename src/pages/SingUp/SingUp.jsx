@@ -4,24 +4,25 @@ import {FaFacebookF , FaGoogle , FaLinkedinIn} from 'react-icons/fa'
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../providers/AuthProvider';
 
-const Login = () => {
+const SingUp = () => {
 
-    const {singIn} = useContext(AuthContext);
+    const {createUser} = useContext(AuthContext)
 
-    const handleLogin = event => {
+    const handleSingUp = event => {
         event.preventDefault();
         const form = event.target;
         const email = form.email.value;
         const password = form.password.value;
-        console.log(email , password)
+        const name = form.name.value;
+        console.log(email , password , name)
 
-        singIn(email , password)
+        createUser(email , password)
         .then(result => {
-            const user =result.user;
-            console.log(user);
+            const user = result.user;
+            console.log(user)
         })
         .catch(error => {
-            console.log(error.message);
+            console.log(error.message)
         })
     }
 
@@ -31,8 +32,14 @@ const Login = () => {
                 <img src={img} alt='' />
             </div>
             <div className='w-full md:w-2/4 lg:w-2/5 py-10 border md:mr-2'>
-                <h3 className='text-center text-3xl font-semibold'>Login</h3>
-                <form onSubmit={handleLogin} className='w-4/5 lg:w-2/3 mx-auto'>
+                <h3 className='text-center text-3xl font-semibold'>Sing Up</h3>
+                <form onSubmit={handleSingUp} className='w-4/5 lg:w-2/3 mx-auto'>
+                    <div className="form-control">
+                        <label className="label">
+                            <span className="label-text text-xl font-medium">Your Name</span>
+                        </label>
+                        <input type="text" placeholder="Your name" name='name' required className="input input-bordered " />
+                    </div>
                     <div className="form-control">
                         <label className="label">
                             <span className="label-text text-xl font-medium">Email</span>
@@ -44,11 +51,8 @@ const Login = () => {
                             <span className="label-text text-xl font-medium">Password</span>
                         </label>
                         <input type="password" placeholder="Your Password" name='password' required className="input input-bordered " />
-                        <label className="label">
-                            <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
-                        </label>
                     </div>
-                    <input type="submit" value="Login"  className='w-full btn border-0 normal-case hover:bg-[#FF3811] hover:text-white  bg-[#FF3811] text-white py-3 my-5 rounded-md font-semibold'/>
+                    <input type="submit" value="Sing Up"  className='w-full btn border-0 normal-case hover:bg-[#FF3811] hover:text-white bg-[#FF3811] text-white py-3 my-5 rounded-md font-semibold'/>
                 </form>
                 <div className='w-2/3 mx-auto'>
                     <h6 className='text-center my-3 font-semibold'>Or sing with</h6>
@@ -57,11 +61,11 @@ const Login = () => {
                         <button className='rounded-full bg-[#F5F5F8] p-4 text-[#3B5998]'><FaLinkedinIn></FaLinkedinIn></button>
                         <button className='rounded-full bg-[#F5F5F8] p-4 text-[#3B5998]'><FaGoogle></FaGoogle></button>
                     </div>
-                    <p className='text-center'>New to this website ? <Link to="/singUp" className='text-red-500 font-semibold'>Sing up</Link></p>
+                    <p className='text-center'>Already have an account ? <Link to="/login" className='text-red-500 font-semibold'>Log in</Link></p>
                 </div>
             </div>
         </div>
     );
 };
 
-export default Login;
+export default SingUp;
