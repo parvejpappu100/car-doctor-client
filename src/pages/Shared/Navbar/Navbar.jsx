@@ -1,9 +1,23 @@
-import React from "react";
+import React, { useContext } from "react";
 import {FaSearch , FaShoppingBag} from 'react-icons/fa'
 import { Link } from "react-router-dom";
 import logo from '../../../assets/logo.svg'
+import { AuthContext } from "../../../providers/AuthProvider";
 
 const Navbar = () => {
+
+  const {user , logOut} = useContext(AuthContext);
+
+  const handleLogOut = () => {
+    logOut()
+    .then(result => {
+       alert("Log out successfully");
+    })
+    .catch(error => {
+      console.log(error)
+    })
+  }
+
   return (
     <div className="navbar bg-base-100 mb-10  lg:container mx-auto">
       <div className="navbar-start">
@@ -43,6 +57,14 @@ const Navbar = () => {
             <li>
               <a>Contact</a>
             </li>
+            
+              {
+                user ? <div className="flex flex-col lg:flex-row">
+                  <li><Link to="/bookings">My Bookings</Link></li>
+                  <li><a onClick={handleLogOut}>Log Out</a></li>
+                </div> : <li><Link to="/login">Login</Link></li>
+              }
+            
             <Link><button className="block md:hidden btn bg-white text-red-500 border border-red-400 normal-case hover:border-0 hover:bg-red-500 hover:text-white">Appointment</button></Link>
           </ul>
         </div>
@@ -67,6 +89,14 @@ const Navbar = () => {
           <li>
             <a>Contact</a>
           </li>
+          
+            {
+              user ? <div className="flex flex-col lg:flex-row">
+                <li><Link to="/bookings">My Bookings</Link></li>
+                <li><a onClick={handleLogOut}>Log Out</a></li>
+              </div> : <li><Link to="/login">Login</Link></li>
+            }
+          
         </ul>
       </div>
       <div className="navbar-end flex items-center gap-5">
